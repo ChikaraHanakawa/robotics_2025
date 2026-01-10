@@ -67,7 +67,9 @@ K-means法は教師なし学習のデータ分類．
     <img src="fig/explanation5.png" width=300>
 
 6. **収束判定**
-	- 重心 $\mathbf{\mu}_j$ の位置が変化しなくなる（$\mathbf{\mu}_j^{\text{old}} \approx \mathbf{\mu}_j^{\text{new}}$）まで2, 3を繰り返す．
+	- 重心 $\mathbf{\mu}_j$ の位置が変化しなくなる
+    （$\mathbf{\mu}_j^{\text{old}} \approx \mathbf{\mu}_j^{\text{new}}$）
+    まで3から5を繰り返す．
 
     <img src="fig/explanation6.png" width=300>
 
