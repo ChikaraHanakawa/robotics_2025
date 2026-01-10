@@ -24,30 +24,54 @@ python3 k-means.py
 
 ## アルゴリズムの仕組み
 
-本コードでは以下の「EMアルゴリズム」に基づいたステップを実行しています．
+### K-meansとは
+K-means法は教師なし学習のデータ分類．
+教師なし学習とは，教師となる正解データを使わずにデータの関連性を求める手法です．
+正解データが不要のため，機械学習を行うのに準備が少ないのがメリットです．デメリットとしては，正解がない事による評価が難しいことです．
 
 ### K-meansアルゴリズムの数式表現
 
-1. **初期化 (Initialization)**
-	- データ点 $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_N\}$ からランダムに $k$ 個の重心（セントロイド） $\{\mathbf{\mu}_1, \ldots, \mathbf{\mu}_k\}$ を選ぶ．
+1. **データ**
+    - このようなデータ $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_N\}$ があったとする．
 
-2. **割り当てステップ (Assignment / E-step)**
-	- 各データ点 $\mathbf{x}_i$ について、最も近い重心 $\mathbf{\mu}_j$ を求め、クラスタラベル $c_i$ を次式で決定．
-	  $$
-	  c_i = \underset{j \in \{1, \ldots, k\}}{\arg\min} \; \| \mathbf{x}_i - \mathbf{\mu}_j \|_2
-	  $$
+    <img src="fig/explanation1.png" width=300>
 
-3. **重心更新ステップ (Update / M-step)**
+2. **初期化**
+	- データからランダムに $k$ 個の重心（セントロイド） $\{\mathbf{\mu}_1, \ldots, \mathbf{\mu}_k\}$ を選ぶ．
+
+    <img src="fig/explanation2.png" width=300>
+
+3. **距離計算**
+	- 各データ点 $\mathbf{x}_i$ について、すべての重心 $\mathbf{\mu}_j$ とのユークリッド距離 $d_{ij}$ を計算し、最も距離が小さい重心に割り当てます．
+
+        $d_{ij} = \| \mathbf{x}_i - \mathbf{\mu}_j \|_2$
+    
+    <img src="fig/explanation3.png" width=300>
+
+4. **割り当て**
+	- そして、クラスタラベル $c_i$ を次式で決定します．
+
+	  $c_i = \underset{j \in \{1, \ldots, k\}}{\arg\min} \, d_{ij}$
+
+    <img src="fig/explanation4.png" width=300>
+
+5. **重心更新**
 	- 各クラスタ $j$ について、割り当てられた点の平均を新たな重心とする．
-	  $$
-	  \mathbf{\mu}_j = \frac{1}{N_j} \sum_{i: c_i = j} \mathbf{x}_i
-	  $$
-	  ここで $N_j$ はクラスタ $j$ に属する点の数．
 
-4. **収束判定 (Convergence)**
+        $
+        \mathbf{\mu}_j = \frac{1}{N_j} \sum_{i: c_i = j} \mathbf{x}_i
+        $
+
+	- ここで $N_j$ はクラスタ $j$ に属する点の数．
+
+    <img src="fig/explanation5.png" width=300>
+
+6. **収束判定**
 	- 重心 $\mathbf{\mu}_j$ の位置が変化しなくなる（$\mathbf{\mu}_j^{\text{old}} \approx \mathbf{\mu}_j^{\text{new}}$）まで2, 3を繰り返す．
+
+    <img src="fig/explanation6.png" width=300>
 
 ---
 
 ### 実行結果
-<img src="fig/k_means.png" width=700>
+<img src="fig/Kmeans_result.gif" width=700>
